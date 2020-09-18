@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	scan：当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
+	scanPeriod：设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒当scan为true时，此属性生效。默认的时间间隔为1分钟。
+	debug：当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
+-->
+<configuration debug="false" scan="false" scanPeriod="60 seconds" >
+	<!-- 定义日志的根目录 -->
+	<property name="log.path" value="logs/"/>
+	<springProperty scop="context" name="spring.application.name" source="spring.application.name" defaultValue=""/>
+	<!-- 彩色日志格式 -->
+	<property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+	<!-- 彩色日志依赖的渲染类 -->
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+	<conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+	<conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+	<!-- ch.qos.logback.core.ConsoleAppender 表示控制台输出 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- debug日志输出配置 -->
+	<appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.path}/debug.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/%d{yyyy-MM, aux}/debug.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<maxFileSize>50MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date [%thread] %-5level [%logger{50}] %file:%line - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- error日志输出配置 -->
+	<appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.path}/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/%d{yyyy-MM}/error.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<maxFileSize>50MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date [%thread] %-5level [%logger{50}] %file:%line - %msg%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+	</appender>
+
+	<!--
+		 logger主要用于存放日志对象，也可以定义日志类型、级别
+		 name：表示匹配的logger类型前缀，也就是包的前半部分
+		 level：要记录的日志级别，包括 TRACE < DEBUG < INFO < WARN < ERROR
+		 additivity：作用在于children-logger是否使用 rootLogger配置的appender进行输出，
+		 false：表示只用当前logger的appender-ref，true：
+		 表示当前logger的appender-ref和rootLogger的appender-ref都有效
+ 	-->
+	<!-- hibernate logger -->
+	<!--<logger name="com.atguigu" level="debug" />-->
+	<!-- Spring framework logger -->
+	<!--<logger name="logging.level.org.springframework.web" level="debug" additivity="false"></logger>-->
+
+	<!--
+		Level: FATAL 0  ERROR 3  WARN 4  INFO 6  DEBUG 7
+		root与logger是父子关系，没有特别定义则默认为root，任何一个类只会和一个logger对应，
+		要么是定义的logger，要么是root，判断的关键在于找到这个logger，然后判断这个logger的appender和level。
+	-->
+	<root level="INFO">
+		<appender-ref ref="console"/>
+		<appender-ref ref="debug"/>
+		<appender-ref ref="error"/>
+	</root>
+</configuration>
