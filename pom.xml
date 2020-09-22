@@ -12,9 +12,9 @@
 
     <groupId>com.faster</groupId>
     <artifactId>faster-manage</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>faster-manage</name>
-    <description>快捷开发基础平台</description>
+    <description>快捷开发后台管理基础平台</description>
 
     <packaging>pom</packaging>
 
@@ -40,12 +40,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -56,6 +50,11 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <!-- mybatis-plus   mybatis的增强版-->
         <dependency>
@@ -76,7 +75,8 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.11.0</version>
         </dependency>
-        <!--swagger 最新依赖内置版本-->
+
+        <!--swagger 最新依赖内置版本 begin-->
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-models</artifactId>
@@ -87,6 +87,8 @@
             <artifactId>swagger-annotations</artifactId>
             <version>${swagger.core.version}</version>
         </dependency>
+        <!--swagger 最新依赖内置版本  end-->
+
         <!--apache工具类-->
         <dependency>
             <groupId>commons-lang</groupId>
@@ -99,17 +101,16 @@
             <artifactId>validation-api</artifactId>
             <version>2.0.1.Final</version>
         </dependency>
-        <!--AOP-->
+        <!--Spring AOP-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!--安全依赖获取上下文信息  begin-->
+        <!--安全依赖获取上下文信息-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>
-        <!--安全依赖获取上下文信息  end-->
     </dependencies>
 
     <build>

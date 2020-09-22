@@ -162,7 +162,7 @@ public class SnowFlakeUtil {
         lastTime = currentMillis;
         // 从这里可知分布式唯一ID的组成部分；
         return ((currentMillis - EPOCH) << TIMESTAMP_LEFT_SHIFT_BITS) | (workerId << WORKER_ID_LEFT_SHIFT_BITS) | sequence;
-    }*/
+    }
 
     // 获取下一毫秒的方法：死循环获取当前毫秒与lastTime比较，直到大于lastTime的值；
     /*private long waitUntilNextTime(final long lastTime) {

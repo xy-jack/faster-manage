@@ -1,6 +1,5 @@
 package com.faster.dev.mapper;
 
-import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,7 +14,6 @@ import java.util.Map;
  * @author lengleng
  * @date 2018-07-30
  */
-@Mapper
 public interface GeneratorMapper {
 
 	/**
@@ -32,7 +30,7 @@ public interface GeneratorMapper {
 	 * @param dsName 数据源名称
 	 * @return
 	 */
-	@DS("#last")
+	//@DS("#last")
 	Map<String, String> queryTable(@Param("tableName") String tableName, String dsName);
 
 	/**
@@ -41,7 +39,7 @@ public interface GeneratorMapper {
 	 * @param dsName 数据源名称
 	 * @return
 	 */
-	@DS("#last")
+	//@DS("#last")
 	List<Map<String, String>> queryColumns(@Param("tableName") String tableName, String dsName);
 
 }

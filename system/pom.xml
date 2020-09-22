@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.faster</groupId>
         <artifactId>faster-manage</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.1</version>
     </parent>
 
     <artifactId>system</artifactId>

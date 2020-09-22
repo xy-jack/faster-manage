@@ -3,7 +3,6 @@ package com.faster.dev.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -39,7 +38,7 @@ public class GeneratorServiceImpl implements IGeneratorService {
 	 * @return
 	 */
 	@Override
-	@DS("#last")
+	//@DS("#last")
 	public IPage<List<Map<String, Object>>> getPage(Page page, String tableName, String dsName) {
 		return generatorMapper.queryList(page, tableName);
 	}

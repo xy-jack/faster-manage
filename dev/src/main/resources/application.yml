@@ -3,4 +3,3 @@ logging:
     org:
       springframework:
         web: info
-

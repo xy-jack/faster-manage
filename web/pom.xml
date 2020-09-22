@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.faster</groupId>
         <artifactId>faster-manage</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.1</version>
     </parent>
 
     <artifactId>web</artifactId>
@@ -42,11 +42,11 @@
             <scope>compile</scope>
         </dependency>
         <!--本地-开发服务-->
-        <!--<dependency>
+        <dependency>
             <groupId>com.faster</groupId>
             <artifactId>dev</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
     </dependencies>
 
     <build>

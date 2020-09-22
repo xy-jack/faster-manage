@@ -42,7 +42,7 @@ public class GeneratorController {
 		byte[] data = generatorService.generatorCode(genConfig);
 		response.reset();
 		response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
-				String.format("attachment; filename=%s.zip", genConfig.getTableName()));
+		String.format("attachment; filename=%s.zip", genConfig.getTableName()));
 		response.addHeader(HttpHeaders.CONTENT_LENGTH, String.valueOf(data.length));
 		response.setContentType("application/octet-stream; charset=UTF-8");
 

@@ -60,7 +60,6 @@ public class CodeGenUtils {
 
 	/**
 	 * 配置
-	 * @return
 	 */
 	private List<String> getTemplates() {
 		List<String> templates = new ArrayList<>();

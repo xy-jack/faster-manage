@@ -43,12 +43,12 @@ public interface CommonConstants {
 	/**
 	 * 前端工程名
 	 */
-	String FRONT_END_PROJECT = "pig-ui";
+	String FRONT_END_PROJECT = "faster-client";
 
 	/**
 	 * 后端工程名
 	 */
-	String BACK_END_PROJECT = "pig";
+	String BACK_END_PROJECT = "faster-manage";
 
 	/**
 	 * 成功标记
