@@ -1,4 +1,4 @@
-package com.faster.utils;
+package com.faster.system.utils;
 
 import com.faster.dto.system.MenuTree;
 import com.faster.dto.system.TreeNode;

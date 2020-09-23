@@ -14,7 +14,7 @@ import com.faster.system.mapper.SysRoleMenuMapper;
 import com.faster.system.service.ISysMenuService;
 import com.faster.utils.Result;
 import com.faster.vo.system.MenuVO;
-import com.faster.utils.TreeUtil;
+import com.faster.system.utils.TreeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

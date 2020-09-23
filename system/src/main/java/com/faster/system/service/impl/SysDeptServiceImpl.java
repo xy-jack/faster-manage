@@ -10,7 +10,7 @@ import com.faster.system.mapper.SysDeptMapper;
 import com.faster.system.service.ISysDeptRelationService;
 import com.faster.system.service.ISysDeptService;
 import com.faster.utils.SecurityUtils;
-import com.faster.utils.TreeUtil;
+import com.faster.system.utils.TreeUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

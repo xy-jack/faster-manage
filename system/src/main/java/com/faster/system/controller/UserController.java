@@ -7,9 +7,13 @@ import com.faster.dto.system.UserDTO;
 import com.faster.entity.system.SysUser;
 import com.faster.system.service.ISysUserService;
 import com.faster.utils.Result;
+import com.faster.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -29,6 +33,8 @@ public class UserController {
 	 */
 	@GetMapping(value = { "/info" })
 	public Result info() {
+		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//Object principal = authentication.getPrincipal();
 		//String username = SecurityUtils.getUser().getUsername();
 		String username = "admin";
 		SysUser user = userService.getOne(Wrappers.<SysUser>query().lambda().eq(SysUser::getUsername, username));

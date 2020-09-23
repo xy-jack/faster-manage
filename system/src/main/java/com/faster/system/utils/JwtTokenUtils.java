@@ -1,5 +1,5 @@
 
-package com.faster.utils;
+package com.faster.system.utils;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -37,13 +37,13 @@ public class JwtTokenUtils {
 
 	/**
 	 * Create token.
-	 * @param subject auth info
+	 * @param authentication auth info
 	 * @return token
 	 */
-	public static String createToken(String subject) {
+	public static String createToken(Authentication authentication) {
 		long now = System.currentTimeMillis();
 		Date validity = new Date(now + TOKEN_VALIDITY_IN_MILLISECONDS);
-		return Jwts.builder().setSubject(subject).claim(AUTHORITIES_KEY, "").signWith(SECRET_KEY, SignatureAlgorithm.HS256)
+		return Jwts.builder().setSubject(authentication.getName()).claim(AUTHORITIES_KEY, "").signWith(SECRET_KEY, SignatureAlgorithm.HS256)
 				.setExpiration(validity).compact();
 	}
 
@@ -52,7 +52,7 @@ public class JwtTokenUtils {
 	 * @param token token
 	 * @return auth info
 	 */
-	public Authentication getAuthentication(String token) {
+	public static Authentication getAuthentication(String token) {
 		Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
 
 		List<GrantedAuthority> authorities = AuthorityUtils

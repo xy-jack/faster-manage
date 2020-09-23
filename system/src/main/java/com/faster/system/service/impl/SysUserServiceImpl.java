@@ -24,10 +24,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -45,7 +44,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 
-    private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
+    //private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
 
     @Autowired
     private ISysMenuService sysMenuService;
@@ -67,7 +66,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(userDto, sysUser);
         sysUser.setDelFlag(CommonConstants.STATUS_NORMAL);
-        sysUser.setPassword(ENCODER.encode(userDto.getPassword()));
+        sysUser.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().trim().getBytes()));
         baseMapper.insert(sysUser);
         List<SysUserRole> userRoleList = userDto.getRole().stream().map(roleId -> {
             SysUserRole userRole = new SysUserRole();
@@ -143,12 +142,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public Result updateUserInfo(UserDTO userDto) {
         UserVO userVO = baseMapper.getUserVoByUsername(userDto.getUsername());
 
-        if (!ENCODER.matches(userDto.getPassword(), userVO.getPassword())) {
-            return Result.failed("原密码错误，修改失败");
+        String oldPassword = DigestUtils.md5DigestAsHex(userDto.getPassword().trim().getBytes());
+        if (!oldPassword.equals(userVO.getPassword())) {
+           return Result.failed("原密码错误，修改失败");
         }
 
         SysUser sysUser = new SysUser();
-        sysUser.setPassword(ENCODER.encode(userDto.getNewpassword1()));
+        sysUser.setPassword(DigestUtils.md5DigestAsHex(userDto.getNewpassword1().trim().getBytes()));
         sysUser.setPhone(userDto.getPhone());
         sysUser.setUserId(userVO.getUserId());
         sysUser.setAvatar(userDto.getAvatar());
@@ -163,7 +163,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         sysUser.setUpdateTime(LocalDateTime.now());
 
         if (StrUtil.isNotBlank(userDto.getPassword())) {
-            sysUser.setPassword(ENCODER.encode(userDto.getPassword()));
+            sysUser.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().trim().getBytes()));
         }
         this.updateById(sysUser);
 

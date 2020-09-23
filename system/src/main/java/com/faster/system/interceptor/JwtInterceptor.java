@@ -1,7 +1,7 @@
 package com.faster.system.interceptor;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.faster.utils.JwtTokenUtils;
+import com.faster.system.utils.JwtTokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
