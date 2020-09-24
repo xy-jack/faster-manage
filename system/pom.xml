@@ -53,6 +53,12 @@
             <version>0.10.5</version>
             <scope>runtime</scope>
         </dependency>
+        <!-- quartz分布式定时任务 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+            <version>2.2.6.RELEASE</version>
+        </dependency>
         <!-- JWT权限认证相关jar  end -->
 
         <!--稳定版本，替代spring security bom内置-->
